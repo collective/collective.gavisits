@@ -1,0 +1,61 @@
+Functional test:
+
+    >>> app = layer['app']
+    >>> portal = layer['portal']
+    >>> request = layer['request']
+
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> portalURL = portal.absolute_url()
+
+    >>> from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
+    >>> browser.open(portalURL + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = SITE_OWNER_NAME
+    >>> browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
+    >>> browser.getControl(name='submit').click()
+
+    >>> 'You are now logged in' in browser.contents
+    True
+
+Add 2 objects, one with the behavior and one without
+
+    >>> browser.open(portalURL)
+    >>> browser.getLink("Add new").click()
+    >>> browser.getControl("Test type", index=0).click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl('Title').value = 'With behavior'
+    >>> browser.getControl("Save").click()
+    
+    >>> browser.open(portalURL)
+    >>> browser.getLink("Add new").click()
+    >>> browser.getControl("Test type no behavior").click()
+    >>> browser.getControl("Add").click()
+    >>> browser.getControl('Title').value = 'Without behavior'
+    >>> browser.getControl("Save").click()
+    
+    >>> with_behavior = portalURL + "/with-behavior"
+    >>> without_behavior = portalURL + "/without-behavior"
+    
+Now check for the view template
+    
+    >>> browser.open(with_behavior)
+    >>> 'id="form-widgets-IVisitsCounter-visits"' in browser.contents
+    False
+    >>> '<div class="visits-counter">' in browser.contents
+    True
+    >>> browser.open(without_behavior)
+    >>> 'id="form-widgets-IVisitsCounter-visits"' in browser.contents
+    False
+    >>> '<div class="visits-counter">' in browser.contents
+    False
+    
+Check for the edit template
+
+    >>> browser.open(with_behavior)
+    >>> browser.getLink("Edit").click()
+    >>> 'visits' in browser.contents
+    False
+    >>> browser.open(without_behavior)
+    >>> browser.getLink("Edit").click()
+    >>> 'visits' in browser.contents
+    False

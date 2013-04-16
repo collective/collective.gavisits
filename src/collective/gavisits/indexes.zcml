@@ -1,0 +1,8 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="collective.gavisits">
+    
+    <adapter name="visits" factory=".indexers.get_visits" />
+    <adapter name="visits" factory=".indexers.get_visits_raise" />
+
+</configure>

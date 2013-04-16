@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<object name="portal_analytics" meta_type="Google Analytics Tool"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <object name="collective-gavisits-visits" meta_type="Google Analytics Report"
+    i18n:domain="collective.gavisits">
+  <property name="title"
+     i18n:translate="">Visits Counter (collective.gavisits)</property>
+  <property name="description"
+     i18n:translate="">Return the number of visits for a specific page. This report is used by the behavior provided with the collective.gavisits package</property>
+  <property name="categories">
+   <element value="Site Wide"/>
+   <element value="Portlet"/>
+  </property>
+  <property name="plugin_names">
+   <element value="Contextual Results"/>
+   <element value="Variable Date Range"/>
+  </property>
+  <property name="metrics">
+   <element value="ga:pageviews"/>
+  </property>
+  <property name="dimensions">
+   <element value="ga:pagePath"/>
+  </property>
+  <property name="filters">
+   <element value="page_filter"/>
+  </property>
+  <property name="sort"/>
+  <property name="start_date"></property>
+  <property name="end_date"></property>
+  <property name="max_results">python:1000</property>
+  <property name="columns">python:['Visits Counter']</property>
+  <property name="row_repeat">possible_dates</property>
+  <property name="rows">python:[metric('ga:uniquePageviews', row)]</property>
+  <property name="viz_type">Gauge</property>
+  <property name="viz_options">
+   <element value="height python:40"/>
+   <element value="showAxisLines python:False"/>
+   <element value="showValueLabels python:False"/>
+  </property>
+  <property name="body">&lt;h3&gt;Page Views&lt;/h3&gt;
+   &lt;div tal:replace="structure view/visualization"&gt;&lt;/div&gt;
+   &lt;tal:block tal:define="pageviews python:view.metric('ga:uniquePageviews');
+   units python:view.possible_dates(aggregate=len);"&gt;
+   &lt;p&gt;
+   &lt;strong tal:content="pageviews"&gt;1000&lt;/strong&gt; total views of this page during the last
+   &lt;span tal:replace="string:${units} ${date_range_unit_plural/lower}"&gt;
+   30 days
+   &lt;/span&gt;
+   &lt;/p&gt;
+   &lt;/tal:block&gt;</property>
+ </object>
+</object>

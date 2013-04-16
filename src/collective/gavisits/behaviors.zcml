@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.gavisits">
+    
+    <include package="plone.behavior" file="meta.zcml"/>
+
+    <plone:behavior
+        title="Visits counter"
+        description="Allows to keep track of visits using Google Analytics"
+        provides=".behavior.IVisitsCounter"
+        factory=".behavior.VisitsCounter"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
+
+</configure>

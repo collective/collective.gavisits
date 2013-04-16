@@ -1,0 +1,9 @@
+<div tal:condition="view/available"
+     class="visits-counter">
+ 
+    <span i18n:translate="" i18n:domain="collective.gavisits">Visits:</span>
+    <span class="visits-number" tal:content="view/get_visits" />
+
+    <script type="text/javascript" src="++resource++collective.gavisits.js/update_visits_counter.js"></script>
+
+</div>

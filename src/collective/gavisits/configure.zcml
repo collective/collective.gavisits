@@ -1,0 +1,53 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.gavisits">
+
+    <include package="plone.directives.form" file="meta.zcml" />
+    <include package="plone.directives.form" />
+
+    <!--
+    <i18n:registerTranslations directory="locales" />-->
+
+    <include file="indexes.zcml" />
+    <include file="behaviors.zcml" />
+    <include file="viewlets.zcml" />
+
+    <genericsetup:registerProfile
+        name="default"
+        title="collective.gavisits"
+        directory="profiles/default"
+        description="Provide a visits counter, which gets its values from Google Analytics"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <genericsetup:registerProfile
+        name="test-fixture"
+        title="collective.gavisits (Test fixture)"
+        directory="profiles/test-fixture"
+        description="Test fixture for testing"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <genericsetup:importStep
+        name="collective.gavisits"
+        title="collective.gavisits special import handlers"
+        description=""
+        handler="collective.gavisits.setuphandlers.setupVarious"
+        />
+
+     <browser:resourceDirectory
+        name="collective.gavisits.js"
+        directory="js"
+        />
+
+    <browser:page
+        name="update-visits-counter"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        class=".browser.UpdateVisitsCounter"
+        permission="zope.Public"
+        />
+</configure>

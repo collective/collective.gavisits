@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.gavisits">
+    
+    <!-- The views counter -->
+    <browser:viewlet
+        name="collective.gavisits.views_counter"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+        template="visitscounter.pt"
+        class=".viewlets.VisitsCounter"
+        permission="zope2.View"
+        />
+
+</configure>
