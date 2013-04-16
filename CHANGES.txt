@@ -1,0 +1,11 @@
+Changelog
+=========
+
+0.1 (unreleased)
+----------------
+
+- Package created using templer
+  [frapell]
+- Provide a behavior that adds the visit counter [frapell]
+- Provide a viewlet that will display the counter [frapell]
+- The visit counter will be updated through JS [frapell]
