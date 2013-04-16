@@ -9,6 +9,7 @@ log.html
 output.xml
 report.html
 selenium*
+Makefile
 bin/
 coverage/
 develop-eggs/
@@ -18,3 +19,4 @@ include/
 lib/
 parts/
 var/
+src/collective.gavisits.egg-info
