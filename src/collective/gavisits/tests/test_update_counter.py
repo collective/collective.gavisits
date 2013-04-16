@@ -49,6 +49,7 @@ class TestUpdateVisitsCounterView(unittest.TestCase):
 
     def test_provide_both_dates_to_override(self):
         overrideAdaptersAndUtilities(self.context)
+        analytics_tool = self.context.portal_analytics
 
         request = self.layer['request']
 
