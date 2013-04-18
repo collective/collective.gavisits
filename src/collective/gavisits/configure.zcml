@@ -9,8 +9,7 @@
     <include package="plone.directives.form" file="meta.zcml" />
     <include package="plone.directives.form" />
 
-    <!--
-    <i18n:registerTranslations directory="locales" />-->
+    <i18n:registerTranslations directory="locales" />
 
     <include file="indexes.zcml" />
     <include file="behaviors.zcml" />
